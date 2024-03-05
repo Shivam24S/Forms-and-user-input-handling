@@ -6,6 +6,13 @@ export default function Login() {
     password: "",
   });
 
+  // validating using onblur
+
+  const [didBlur, setDidBlur] = useState({
+    email: false,
+    password: false,
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("handleSUbmit=>", enteredValues);
@@ -26,8 +33,16 @@ export default function Login() {
 
   // validating input values
 
-  const emailInvalid =
-    enteredValues.email !== "" && !enteredValues.email.includes("@");
+  const emailInvalid = didBlur.email && !enteredValues.email.includes("@");
+
+  // validating using blur method
+
+  const handleBlur = (identifier) => {
+    setDidBlur((prevBlur) => ({
+      ...prevBlur,
+      [identifier]: true,
+    }));
+  };
 
   console.log("checking=>", enteredValues);
   return (
@@ -45,6 +60,7 @@ export default function Login() {
             onChange={(e) => {
               handleInputValues("email", e.target.value);
             }}
+            onBlur={() => handleBlur("email")}
           />
           <div className="control-error">
             {emailInvalid && <p>please enter valid email</p>}
@@ -66,8 +82,12 @@ export default function Login() {
       </div>
 
       <p className="form-actions">
-        <button className="button button-flat">Reset</button>
-        <button className="button">Login</button>
+        <button type="reset" className="button button-flat">
+          Reset
+        </button>
+        <button type="submit" className="button">
+          Login
+        </button>
       </p>
     </form>
   );
