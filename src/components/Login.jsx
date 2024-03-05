@@ -18,11 +18,16 @@ export default function Login() {
     }));
 
     // resetting form values fro state
-    setEnteredValues({
-      email: "",
-      password: "",
-    });
+    // setEnteredValues({
+    //   email: "",
+    //   password: "",
+    // });
   };
+
+  // validating input values
+
+  const emailInvalid =
+    enteredValues.email !== "" && !enteredValues.email.includes("@");
 
   console.log("checking=>", enteredValues);
   return (
@@ -41,6 +46,9 @@ export default function Login() {
               handleInputValues("email", e.target.value);
             }}
           />
+          <div className="control-error">
+            {emailInvalid && <p>"please enter valid email"</p>}
+          </div>
         </div>
 
         <div className="control no-margin">
