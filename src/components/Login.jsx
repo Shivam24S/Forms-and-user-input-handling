@@ -16,6 +16,12 @@ export default function Login() {
       ...prevValues,
       [identifier]: newValues,
     }));
+
+    // resetting form values fro state
+    setEnteredValues({
+      email: "",
+      password: "",
+    });
   };
 
   console.log("checking=>", enteredValues);

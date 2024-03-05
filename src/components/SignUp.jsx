@@ -23,6 +23,10 @@ export default function SignUp() {
     // now here i m merging acquisition data to over all data
     data.acquisition = acquisitionData;
     console.log("all Data Including acquisition data =>", data);
+
+    // for reset form value built in method given by browser
+
+    e.target.reset();
   }
 
   return (
