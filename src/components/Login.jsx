@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputComponent from "./Input";
+import { isEmail, isNotEmpty, hasMinLength } from "../util/validation";
 
 export default function Login() {
   const [enteredValues, setEnteredValues] = useState({
@@ -35,8 +36,19 @@ export default function Login() {
   // validating input values
 
   const emailInvalid = didBlur.email && !enteredValues.email.includes("@");
+  // const passwordInvalid =
+  //   didBlur.password && enteredValues.password.trim().length < 6;
+
+  // out sourcing validation logic and re using code from utils
+
+  // email validation not working
+  // const emailInvalid =
+  //   didBlur.email &&
+  //   !isEmail(enteredValues.email) &&
+  //   !isNotEmpty(enteredValues.email);
+
   const passwordInvalid =
-    didBlur.password && enteredValues.password.trim().length < 6;
+    didBlur.password && !hasMinLength(enteredValues.password, 6);
 
   // validating using blur method
 
