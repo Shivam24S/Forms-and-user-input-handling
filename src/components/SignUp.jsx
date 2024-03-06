@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function SignUp() {
+  const [passwordIsNotEqual, setPasswordIsNotEqual] = useState(false);
+
   // now here i m using built in browser method to store form data
 
   function handleSubmit(e) {
@@ -24,9 +28,30 @@ export default function SignUp() {
     data.acquisition = acquisitionData;
     console.log("all Data Including acquisition data =>", data);
 
+    // password matching validation logic
+
+    // if (data.password !== data["confirm-password"]) {
+    //   setPasswordIsNotEqual(true);
+    //   console.log("password is not equal");
+    //   return;
+    // }
+
+    const password = fd.get("password");
+
+    const confirmPassword = fd.get("confirm-password");
+
+    console.log("password=>", password + "confirm password", confirmPassword);
+
+    if (password !== confirmPassword) {
+      setPasswordIsNotEqual(true);
+      return;
+    }
+
+    console.log(data);
+
     // for reset form value built in method given by browser
 
-    e.target.reset();
+    // e.target.reset();
   }
 
   return (
@@ -62,6 +87,9 @@ export default function SignUp() {
             minLength={8}
             maxLength={10}
           />
+          <div className="control-error">
+            {passwordIsNotEqual && <p>password must be matched</p>}
+          </div>
         </div>
       </div>
 
